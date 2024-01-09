@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:video_player/video_player.dart';
+import 'package:video_player_practice/full_screen_player.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,9 +47,11 @@ class VideoPlayerPage extends HookWidget {
 
         controller.value!.addListener(() {
           // position.value = controller.value!.value.position.toString();
-          position.value = controller.value!.value.position.inSeconds.toStringAsFixed(0);
+          position.value =
+              controller.value!.value.position.inSeconds.toStringAsFixed(0);
           // duration.value = controller.value!.value.duration.toString();
-          duration.value = controller.value!.value.duration.inSeconds.toStringAsFixed(0);
+          duration.value =
+              controller.value!.value.duration.inSeconds.toStringAsFixed(0);
         });
         return () {
           controller.value!.dispose();
@@ -100,6 +103,18 @@ class VideoPlayerPage extends HookWidget {
                 },
                 icon: const Icon(Icons.pause),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return const FullScreenPlayer();
+                      },
+                    ),
+                  );
+                },
+                child: const Text('全画面'),
+              )
             ],
           ),
         ],
